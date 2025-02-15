@@ -3,8 +3,8 @@ import time
 import os
 from datetime import datetime
 
-LOGIN_URL = "http://localhost:5000/runcoco/login.php"
-EXPORT_URL = "http://localhost:5000/runcoco/form1/export_result_lap.php"
+LOGIN_URL = "http://localhost/runcoco/login.php"
+EXPORT_URL = "http://localhost/runcoco/form1/export_result_lap.php"
 LOGIN_DATA = {
     "txtEmailaddress": "runcoco@gmail.com",
     "txtPassword": "123",
