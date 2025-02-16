@@ -3,14 +3,6 @@ import time
 import os
 from datetime import datetime
 
-LOGIN_URL = "http://localhost/runcoco/login.php"
-EXPORT_URL = "http://localhost/runcoco/form1/export_result_lap.php"
-LOGIN_DATA = {
-    "txtEmailaddress": "runcoco@gmail.com",
-    "txtPassword": "123",
-    "cboEvent": "10",
-    "btnLogin2": "Sign in"
-}
 RETRIES = 5
 DOWNLOAD_INTERVAL = 5
 GIT_INTERVAL = 10
@@ -64,13 +56,21 @@ def git_operations(filename):
     except Exception as e:
         print(f"An error occurred during git operations: {e}")
 
-def main():
+def main(login_url, export_url, login_data):
     session = requests.Session()
-    if login(session, LOGIN_URL, LOGIN_DATA):
+    if login(session, login_url, login_data):
         while True:
-            if download_file(session, EXPORT_URL, "Data.csv"):
+            if download_file(session, export_url, "Data.csv"):
                 git_operations("Data.csv")
             time.sleep(DOWNLOAD_INTERVAL)
 
 if __name__ == "__main__":
-    main()
+    LOGIN_URL = "http://localhost/runcoco/login.php"
+    EXPORT_URL = "http://localhost/runcoco/form1/export_result_lap.php"
+    LOGIN_DATA = {
+        "txtEmailaddress": "runcoco@gmail.com",
+        "txtPassword": "123",
+        "cboEvent": "10",
+        "btnLogin2": "Sign in"
+    }
+    main(LOGIN_URL, EXPORT_URL, LOGIN_DATA)
